@@ -20,9 +20,4 @@ class Box extends Component {
   }
 }
 
-const boxStyle = {
-  height: 50,
-  width: 50,
-};
-
 export default Box;

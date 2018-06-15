@@ -13,7 +13,14 @@ class Grid extends Component {
     return (
       <div style={gridStyle}>
         {this.props.boxes.map((box, index) => {
-          return <Box toggle={this.props.toggle} box={box} index={index} />;
+          return (
+            <Box
+              key={index}
+              toggle={this.props.toggle}
+              box={box}
+              index={index}
+            />
+          );
         })}
       </div>
     );
