@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 class LevelBox extends Component {
   render() {
-    const { levelBoxStyles } = styles;
+    const { boxStyles } = styles;
     return (
-      <div class="currentLevel" style={levelBoxStyles}>
+      <div className="currentLevel" style={boxStyles}>
         <div>{this.props.title}</div>
         <div style={{ fontSize: 28 }}>{this.props.data}</div>
       </div>
@@ -12,7 +12,7 @@ class LevelBox extends Component {
   }
 }
 const styles = {
-  levelBoxStyles: {
+  boxStyles: {
     display: 'flex',
     flexDirection: 'column',
     width: 50,

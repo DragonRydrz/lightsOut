@@ -17,6 +17,8 @@ class LightsOut extends React.Component {
     },
   };
   componentDidMount() {
+    const maxLevel = localStorage.getItem('maxLevel');
+    if (maxLevel) this.setState({ currentLevel: maxLevel });
     this.setToLevel();
   }
   render() {
@@ -32,6 +34,7 @@ class LightsOut extends React.Component {
         <Dashboard
           level={this.state.currentLevel}
           moveCount={this.state.moveCount}
+          reset={this.setToLevel}
         />
       </div>
     );
@@ -68,11 +71,12 @@ class LightsOut extends React.Component {
     const boxes = this.state.boxes.map((box, index) => {
       return this.state.levels[level].includes(index);
     });
-    this.setState({ boxes, levelCompleted: false });
+    this.setState({ moveCount: 0, boxes, levelCompleted: false });
   };
 
   levelCompleted = () => {
     console.log('completed');
+    // localStorage.setItem('maxLevel', this.state.currentLevel);
     this.setToLevel();
   };
 }
