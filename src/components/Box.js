@@ -13,9 +13,10 @@ class Box extends Component {
       justifyContent: 'center',
     };
     return (
-      <div style={boxStyle} onClick={() => this.props.toggle(this.props.index)}>
-        {this.props.index}
-      </div>
+      <div
+        style={boxStyle}
+        onClick={() => this.props.toggle(this.props.index)}
+      />
     );
   }
 }

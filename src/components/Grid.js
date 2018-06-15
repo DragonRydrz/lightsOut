@@ -9,6 +9,8 @@ class Grid extends Component {
       display: 'flex',
       flexWrap: 'wrap',
       margin: 'auto',
+      border: '1px solid black',
+      backgroundColor: 'gray',
     };
     return (
       <div style={gridStyle}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from '../components/Grid';
-
+import Dashboard from '../components/Dashboard';
 class LightsOut extends React.Component {
   state = {
     boxes: Array(25).fill(false),
@@ -20,10 +20,19 @@ class LightsOut extends React.Component {
     this.setToLevel();
   }
   render() {
+    const appStyles = {
+      display: 'flex',
+      flexDirection: 'column',
+      margin: '20px auto',
+    };
     return (
-      <div style={{ marginTop: 20 }}>
+      <div style={appStyles}>
         {this.state.levelCompleted ? this.levelCompleted() : null}
-        <Grid boxes={this.state.boxes} toggle={this.toggle} />{' '}
+        <Grid boxes={this.state.boxes} toggle={this.toggle} />
+        <Dashboard
+          level={this.state.currentLevel}
+          moveCount={this.state.moveCount}
+        />
       </div>
     );
   }
