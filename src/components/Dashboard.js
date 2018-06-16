@@ -17,7 +17,10 @@ class Dashboard extends Component {
         </button>
 
         <InfoBox title="Moves" data={this.props.moveCount} />
-        <button style={boxStyles} onClick={this.props.reset}>
+        <button
+          style={boxStyles}
+          onClick={() => this.props.reset(this.props.level)}
+        >
           RESET
         </button>
       </div>
