@@ -7,6 +7,7 @@ class LightsOut extends React.Component {
     moveCount: 0,
     levelCompleted: false,
     currentLevel: 1,
+    maxLevel: 1,
     levels: {
       1: [1, 5, 6, 7, 11, 13, 17, 18, 19, 23],
       2: [0, 1, 3, 4, 5, 9, 15, 19, 20, 21, 23, 24],
@@ -38,7 +39,7 @@ class LightsOut extends React.Component {
   componentDidMount() {
     const maxLevel = Number(localStorage.getItem('maxLevel'));
     if (maxLevel) {
-      this.setState({ currentLevel: maxLevel + 1 });
+      this.setState({ currentLevel: maxLevel + 1, maxLevel });
       this.setToLevel(maxLevel + 1);
     } else {
       this.setToLevel(1);
@@ -66,7 +67,10 @@ class LightsOut extends React.Component {
 
   nextLevel = () => {
     console.log(Object.keys(this.state.levels).length);
-    if (this.state.currentLevel < Object.keys(this.state.levels).length) {
+    if (
+      this.state.currentLevel < Object.keys(this.state.levels).length &&
+      this.state.currentLevel <= this.state.maxLevel
+    ) {
       this.setState({ currentLevel: this.state.currentLevel + 1 });
       this.setToLevel(this.state.currentLevel + 1);
     }
@@ -100,6 +104,9 @@ class LightsOut extends React.Component {
       currentLevel: !boxes.includes(true)
         ? this.state.currentLevel + 1
         : this.state.currentLevel,
+      maxLevel: !boxes.includes(true)
+        ? Math.max(this.state.currentLevel, this.state.maxLevel)
+        : this.state.maxLevel,
     });
     console.log(this.state.moveCount);
     if (!boxes.includes(true)) this.levelCompleted();
