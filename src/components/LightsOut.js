@@ -88,10 +88,11 @@ class LightsOut extends React.Component {
     const top = index - 5;
     const bottom = index + 5;
     const left = index % 5 === 0 ? null : index - 1;
+    console.log(left);
     const right = (index + 1) % 5 === 0 ? null : index + 1;
 
     if (top >= 0) boxes[top] = !boxes[top];
-    if (left) boxes[left] = !boxes[left];
+    if (left || left === 0) boxes[left] = !boxes[left];
     if (bottom <= 24) boxes[bottom] = !boxes[bottom];
     if (right) boxes[right] = !boxes[right];
 
