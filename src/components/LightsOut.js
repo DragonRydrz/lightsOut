@@ -7,7 +7,7 @@ class LightsOut extends React.Component {
     moveCount: 0,
     levelCompleted: false,
     currentLevel: 1,
-    maxLevel: 1,
+    maxLevel: 0,
     levels: {
       1: [1, 5, 6, 7, 11, 13, 17, 18, 19, 23],
       2: [0, 1, 3, 4, 5, 9, 15, 19, 20, 21, 23, 24],
@@ -45,12 +45,16 @@ class LightsOut extends React.Component {
       this.setToLevel(1);
     }
   }
+  componentDidUpdate() {
+    if (this.state.levelCompleted) this.levelCompleted(); // TODO: Change to pop up Modal instead
+  }
   render() {
     const appStyles = {
       display: 'flex',
       flexDirection: 'column',
       margin: '20px auto',
     };
+
     return (
       <div style={appStyles}>
         <Grid boxes={this.state.boxes} toggle={this.toggle} />
@@ -66,7 +70,7 @@ class LightsOut extends React.Component {
   }
 
   nextLevel = () => {
-    console.log(Object.keys(this.state.levels).length);
+    // console.log(Object.keys(this.state.levels).length);
     if (
       this.state.currentLevel < Object.keys(this.state.levels).length &&
       this.state.currentLevel <= this.state.maxLevel
@@ -88,7 +92,6 @@ class LightsOut extends React.Component {
     const top = index - 5;
     const bottom = index + 5;
     const left = index % 5 === 0 ? null : index - 1;
-    console.log(left);
     const right = (index + 1) % 5 === 0 ? null : index + 1;
 
     if (top >= 0) boxes[top] = !boxes[top];
@@ -102,15 +105,14 @@ class LightsOut extends React.Component {
       boxes,
       moveCount: !boxes.includes(true) ? 0 : this.state.moveCount + 1,
       levelCompleted: !boxes.includes(true),
-      currentLevel: !boxes.includes(true)
-        ? this.state.currentLevel + 1
-        : this.state.currentLevel,
+      // currentLevel: !boxes.includes(true)
+      //   ? this.state.currentLevel + 1
+      //   : this.state.currentLevel,
       maxLevel: !boxes.includes(true)
         ? Math.max(this.state.currentLevel, this.state.maxLevel)
         : this.state.maxLevel,
     });
-    console.log(this.state.moveCount);
-    if (!boxes.includes(true)) this.levelCompleted();
+    // console.log(this.state.moveCount);
   };
 
   setToLevel = level => {
@@ -123,8 +125,12 @@ class LightsOut extends React.Component {
   };
 
   levelCompleted = () => {
-    console.log('completed');
+    alert(`Great Job! You completed level ${this.state.currentLevel}`);
     localStorage.setItem('maxLevel', this.state.currentLevel);
+    this.setState({
+      levelCompleted: false,
+      currentLevel: this.state.currentLevel + 1,
+    });
     this.setToLevel(this.state.currentLevel + 1);
   };
 }
