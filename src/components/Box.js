@@ -1,24 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Box extends Component {
-  render() {
-    const boxStyle = {
-      height: 50,
-      width: 50,
-      backgroundColor: this.props.box ? 'blue' : 'white',
-      border: '1px solid black',
-      margin: 'auto',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    };
-    return (
-      <div
-        style={boxStyle}
-        onClick={() => this.props.toggle(this.props.index)}
-      />
-    );
-  }
+function Box({ box, toggle, index }) {
+  const boxStyle = {
+    height: 50,
+    width: 50,
+    backgroundColor: box ? 'blue' : 'white',
+    border: '1px solid black',
+    margin: 'auto',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  };
+
+  return <div style={boxStyle} onClick={() => toggle(index)} />;
 }
 
 export default Box;

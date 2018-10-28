@@ -1,31 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import InfoBox from './InfoBox';
 
-class Dashboard extends Component {
-  render() {
-    const { dashboardStyles, boxStyles, changeLevelStyles } = styles;
-    const left = '<-';
-    const right = '->';
-    return (
-      <div style={dashboardStyles}>
-        <button style={changeLevelStyles} onClick={this.props.prevLevel}>
-          {left}
-        </button>
-        <InfoBox title="Level" data={this.props.level} />
-        <button style={changeLevelStyles} onClick={this.props.nextLevel}>
-          {right}
-        </button>
+function Dashboard({ prevLevel, nextLevel, moveCount, reset, level }) {
+  const { dashboardStyles, boxStyles, changeLevelStyles } = styles;
+  const left = '<-';
+  const right = '->';
+  return (
+    <div style={dashboardStyles}>
+      <button style={changeLevelStyles} onClick={prevLevel}>
+        {left}
+      </button>
+      <InfoBox title="Level" data={level} />
+      <button style={changeLevelStyles} onClick={nextLevel}>
+        {right}
+      </button>
 
-        <InfoBox title="Moves" data={this.props.moveCount} />
-        <button
-          style={boxStyles}
-          onClick={() => this.props.reset(this.props.level)}
-        >
-          RESET
-        </button>
-      </div>
-    );
-  }
+      <InfoBox title="Moves" data={moveCount} />
+      <button style={boxStyles} onClick={() => reset(level)}>
+        RESET
+      </button>
+    </div>
+  );
 }
 
 const styles = {
