@@ -1,15 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class LevelBox extends Component {
-  render() {
-    const { boxStyles } = styles;
-    return (
-      <div className="currentLevel" style={boxStyles}>
-        <div>{this.props.title}</div>
-        <div style={{ fontSize: 28 }}>{this.props.data}</div>
-      </div>
-    );
-  }
+function LevelBox({ title, data }) {
+  const { boxStyles } = styles;
+  return (
+    <div className="currentLevel" style={boxStyles}>
+      <div>{title}</div>
+      <div style={{ fontSize: 28 }}>{data}</div>
+    </div>
+  );
 }
 const styles = {
   boxStyles: {
